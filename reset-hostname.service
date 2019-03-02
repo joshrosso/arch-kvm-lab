@@ -1,0 +1,10 @@
+[Unit]
+Description=Sets the hostname of the server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/reset-hostname
+
+[Install]
+WantedBy=default.target
