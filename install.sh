@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# openbsd-netcat: needed for hypervisor to establish connection.
+
 pacman -Sy --needed \
   qemu \
   dhclient \
