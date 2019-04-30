@@ -1,0 +1,12 @@
+in /etc/polkit-1/rules.d/49-org.libvirt.unix.manager.rules :
+
+Add the following :
+
+/* Allow users in kvm group to manage the libvirt
+daemon without authentication */
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.libvirt.unix.manage" &&
+        subject.isInGroup("wheel")) {
+            return polkit.Result.YES;
+    }
+});
