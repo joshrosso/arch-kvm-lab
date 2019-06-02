@@ -51,10 +51,35 @@ This step allows for quick cloning of machines in virsh.
     virt-clone --original $DOMAIN --name $NEW_NAME --file $LOCATION
     ```
 
+### libvirt polkit access
+
+The following provides access to everyone in wheel.
+
+file: `/etc/polkit-1/rules.d/50-libvirt.rules`
+
+```
+/* Allow users in wheel group to manage the libvirt
+daemon without authentication */
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.libvirt.unix.manage" &&
+        subject.isInGroup("wheel")) {
+            return polkit.Result.YES;
+    }
+});
+```
+
 ### qemu connect sample string
 
 The following is a sample connection string that can be used to connect to libvirtd remotely.
 
 ```
-qemu+ssh://root@192.168.0.4/system?key_file=/root/virt-mgr
+qemu+ssh://josh@192.168.0.4/system?key_file=/home/joshrosso/.ssh/key.pem
+```
+
+### Unifi controller install
+
+run shell script
+
+```
+./unifi-install.sh
 ```
